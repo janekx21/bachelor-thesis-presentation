@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Slide 1</section>
+				<section>Slide 2</section>
+				<section>Slide 3 hi</section>
+
+			<section data-auto-animate>
+			  <pre data-id="code-animation"><code data-trim data-line-numbers>
+			    let planets = [
+			      { name: 'mars', diameter: 6779 },
+			    ]
+			  </code></pre>
+			</section>
+			<section data-auto-animate>
+			  <pre data-id="code-animation"><code data-trim data-line-numbers>
+			    let planets = [
+			      { name: 'mars', diameter: 6779 },
+			      { name: 'earth', diameter: 12742 },
+			      { name: 'jupiter', diameter: 139820 }
+			    ]
+			  </code></pre>
+			</section>
+			<section data-auto-animate>
+			  <pre data-id="code-animation"><code data-trim data-line-numbers>
+			    let circumferenceReducer = ( c, planet ) => {
+			      return c + planet.diameter * Math.PI;
+			    }
+
+			    let planets = [
+			      { name: 'mars', diameter: 6779 },
+			      { name: 'earth', diameter: 12742 },
+			      { name: 'jupiter', diameter: 139820 }
+			    ]
+
+			    let c = planets.reduce( circumferenceReducer, 0 )
+			  </code></pre>
+			</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<!-- <script src="plugin/zoom/zoom.js"></script> -->
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
