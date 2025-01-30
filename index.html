@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/simple.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -16,9 +16,103 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-				<section>Slide 3 hi</section>
+
+				<section>
+					<img height="200" src="dist/Signet_FIN_1.svg"></img>
+					<h4><b>Bachelor Thesis</b></h4>
+					<h3><b>Design and Development of an OWL 2 Manchester Syntax Language Server</b></h3>
+					<h4>Janek Winkler</h4>
+				</section>
+			
+				<section>
+					Owl Community
+				</section>
+
+				<section>
+					Graphischer Editor
+				</section>
+
+				<section>
+				Owl MS
+				</section>
+
+				<section>
+				Fehlendes Tooling
+				</section>
+
+				<section>
+				Bestende Parser und deren Probleme
+				</section>
+
+				<section>
+				Tree Sitter
+				</section>
+
+				<section>
+				Grataik Transformation
+				</section>
+
+				<section>
+				Parser Bechmarks
+				</section>
+
+				<section>
+
+					<section>
+						<img src="img/ls-problem.png" />
+
+						<aside class="notes">
+					    Das Problem mit den Traditionellen IDE's und Plugins ist "die Matrix".
+							Der Aufwand neue Sprachen oder neue Texteditoren hinzuzufügen wächst quadratisch.
+						</aside>
+					</section>
+
+					<section>
+						<img src="img/ls-solution.png" />
+
+						<aside class="notes">
+					    Die Lösung ist eine Trennung von Sprach-Server und Sprach-Client.
+							Wenn Server und Client das gleiche Protoll sprechen kann der Aufwand dramatisch verringert werden.
+						</aside>
+					</section>
+
+					<section>
+						<img height="200" src="img/rust.png" />
+						<span style="font-size: 11rem; vertical-align: top">=</span>
+						<img height="200" src="img/icon.png" />
+						<p>Rust Language Server</p>
+
+						<aside class="notes">
+							Für die OWL Mancherster Syntax habe ich daher einen Language Server implementiert.
+						</aside>
+					</section>
+
+				</section>
+
+
+				<section>
+				Feature Überblick
+				</section>
+
+				<section>
+				Datenstrukturen
+				</section>
+
+				<section>
+				Testing
+				</section>
+
+				<section>
+				Deployment
+				</section>
+
+				<section>
+				Qualitative Untersuchung
+				</section>
+
+
+
+				
 
 			<section data-auto-animate>
 			  <pre data-id="code-animation"><code data-trim data-line-numbers>
