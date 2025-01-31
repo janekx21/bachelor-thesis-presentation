@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="dist/theme/simple.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="plugin/highlight/github.css">
 	</head>
 	<body>
 		<div class="reveal">
@@ -49,8 +49,54 @@
 				</section>
 
 				<section>
-				Grataik Transformation
+					<!-- Grammatik Transformation -->
+
+					<section data-auto-animate>
+					  <pre data-id="code-animation"><code data-trim>
+							ontologyDocument ::= { prefixDeclaration } ontology
+					  </code></pre>
+
+					
+						<aside class="notes">
+							Der Parsergenerator benutzt eine simple Definitionssprache. Die offizielle Gramatik wurde in kleinen Schritten zu dieser überführt. Dabei wurden die folgenden transformationen benutzt.
+						</aside>
+					</section>
+
+					<section data-auto-animate>
+					  <pre data-id="code-animation"><code data-trim>
+							ontologyDocument ::= { prefixDeclaration } ontology
+					  </code></pre>
+
+						↓
+
+					  <pre data-id="code-animation"><code data-trim>
+							ontology_document: $ => seq(
+								repeat($.prefix_declaration),
+								$.ontology
+							)
+					  </code></pre>
+					</section>
+
+					<section data-auto-animate data-auto-animate-id="two">
+						<img src="img/grammar-table-1.png"/>
+
+						<aside class="notes">
+							In dieser Tabelle sind alle verwendeten Transformationen zu sehen.
+							[Alle durchgehen und erklären]
+						</aside>
+					</section>
+
+					<section data-auto-animate data-auto-animate-id="two">
+						<img src="img/grammar-table-1.png"/>
+						<img src="img/grammar-table-2.png"/>
+
+						<aside class="notes">
+							Im zweiten Schritt habe ich noch sich wiederholdende Konzepte in Funktionen ausgelagert um die Grammatik lesbarer zu machen.
+						</aside>
+					</section>
+	
 				</section>
+
 
 				<section>
 				Parser Bechmarks
@@ -90,12 +136,36 @@
 				</section>
 
 
+
 				<section>
 				Feature Überblick
 				</section>
 
 				<section>
-				Datenstrukturen
+					<!-- Datenstrukturen -->
+
+					<section data-auto-animate>
+						<img  src="img/string-array.png" />
+					</section>
+
+					<section data-auto-animate>
+						<img  src="img/string-array.png" style="margin-bottom: 0" />
+						<img src="img/string-array-2.png"style="margin-top: 0" />
+					</section>
+
+					<section>
+						<img src="img/rope.png" />
+					</section>
+
+					<section>
+						<img src="img/rope-o.png" />
+
+						<aside class="notes">
+							Inserting and Removing into and from a Rope is way faster.
+							Reporting from i to j is slower.
+						</aside>
+					</section>
+
 				</section>
 
 				<section>
