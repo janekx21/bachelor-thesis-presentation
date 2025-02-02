@@ -1,238 +1,494 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/simple.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/github.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/simple.css">
 
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/github.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<img height="200" src="dist/Signet_FIN_1.svg"></img>
+				<h4><b>Bachelor Thesis</b></h4>
+				<h3><b>Design and Development of an OWL 2 Manchester Syntax Language Server</b></h3>
+				<h4>Janek Winkler</h4>
+			</section>
+
+			<section>
+				<img height="300" src="img/owl.png" />
+				<h2>OWL</h2>
+				<aside class="notes">
+					Es gibt verschiedene Ontologie Sprachen. Eine davon heißt OWL. Das steht für Web Ontology Language.
+					Die OWL Comunity besthen aus viele einzelen Gruppen die an Ontologien arbeiten und diese publizieren. Dabei
+					arbeiten alle mit dem Gleichen Standart, den das W3C (World Wide Web Consortium) vorgibt.
+				</aside>
+			</section>
+
+			<section>
 				<section>
-					<img height="200" src="dist/Signet_FIN_1.svg"></img>
-					<h4><b>Bachelor Thesis</b></h4>
-					<h3><b>Design and Development of an OWL 2 Manchester Syntax Language Server</b></h3>
-					<h4>Janek Winkler</h4>
+					<img height="200" src="img/protege-logo.svg"></img>
+
+					<aside class="notes">
+						Owl besitzt einige Tools um mit Ontologien zu arbeiten. Das verbreitetste davon ist ein Graphischer editor
+						namens Protege. Solche Werkzeuge sind praktisch für ihre zwecke, lassen aber nicht zu auf Text ebene zu
+						arbeiten. Dabei besitzt Owl eine fantastische syntax für Menschen.
+					</aside>
 				</section>
-			
+
 				<section>
-					Owl Community
+					<img src="img/Protege-3.2.1.jpg"></img>
+
+					<aside class="notes">
+						So sieht Protege aus, wenn eine Ontologie geöffnet ist.
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>OWL 2 Web Ontology Language Manchester Syntax</h3>
+
+
+					<aside class="notes">
+						Die Syntax hat weniger Steuerzeichen und ist leichter zu Lesen. Mit einzelnen Frames können neue
+						Nomen/Entitäten definiert werden. Frames können Klassen, Instanzen und andere Konzepte sein. In den Frames
+						werden Relationen definiert.
+					</aside>
 				</section>
 
 				<section>
-					Graphischer Editor
+					<pre>
+						<code data-trim>
+							<script type="text/template">
+								Class: pizza:Margherita
+
+								    Annotations: 
+								        rdfs:label "Margherita"@en,
+								        rdfs:label "Margherita"@pt,
+								        skos:altLabel "Margherita"@en,
+								        skos:altLabel "Margherita Pizza"@en,
+								        skos:prefLabel "Margherita"@en
+    
+								    SubClassOf: 
+								        pizza:NamedPizza,
+								        pizza:hasTopping some pizza:MozzarellaTopping,
+								        pizza:hasTopping some pizza:TomatoTopping,
+								        pizza:hasTopping only 
+								            (pizza:MozzarellaTopping or pizza:TomatoTopping)
+							</script>
+						</code>
+					</pre>
 				</section>
 
+
 				<section>
-				Owl MS
+					<pre>
+						<code data-trim>
+							<script type="text/template">
+								Class: <http://openenergy-platform.org/ontology/oeo/OEO_00000147>
+								    Annotations: 
+								        rdfs:label "emission"
+    
+								    SubClassOf: 
+								        <http://purl.obolibrary.org/obo/BFO_0000015>,
+								        <http://openenergy-platform.org/ontology/oeo/OEO_00000500> some <http://openenergy-platform.org/ontology/oeo/OEO_00000148>
+							</script>
+						</code>
+					</pre>
 				</section>
 
+			</section>
+
+			<section>
+
+				<img src="img/missing.jpg" />
+				<h2>Fehlendes Tooling</h2>
+
+				<aside class="notes">Was bei Owl MS fehlt ist ein "smarter" Text Editor. Solche funktionen übernehmen üblerweise
+					IDEs aber es gibt auch keine solche IDE.
+				</aside>
+			</section>
+
+			<section>
+				<!-- Bestende Parser und deren Probleme -->
 				<section>
-				Fehlendes Tooling
+					<ul>
+						<li>github.com/owlcs/owlapi @ org.semanticweb.owlapi.manchestersyntax.parser</li>
+						<li class="fragment">github.com/spechub/Hets @ OWL2.ParseMS</li>
+					</ul>
+
+					<aside class="notes">
+						Owl besaß bereits zwei Parser von denen ich wusste. Einen in der Owl Api. Ein Java parser. Den zweiten in
+						Hets. Ein Parsec
+						parser. Beide sind für ihre zwecke ausreichend. Es fehlen allerdings zwei wichtige Features die ein live
+						Editor braucht. Error Recovery um mehr als einen Fehler in einer Datei zu finden. Incremental Parsing um
+						kleine änderungen in echtzeit zu verarbeiten. Das letztere ist besonderwichtig, weil Ontologien recht groß
+						werden können.
+					</aside>
 				</section>
 
+			</section>
+
+			<section>
 				<section>
-				Bestende Parser und deren Probleme
+					<img src="img/tree-sitter-small.png" />
+					<p>Tree-sitter</p>
+
+					<aside class="notes">
+						Dieser Parser generator ist besonders beliebt. Er erzeugt einen GLR Parser. Diese sind ähnlich zu LR
+						Parsern, welche ohne Backtracking, in linearer Zeit und deterministisch sind. Das G steht für General, denn
+						dieser parser lässt auch nicht deterministische Pfade zu. Dabei wird über Breath first eine mögliche
+						Ableitung gefunden. In den meißten Fällen laufen diese Parser auch in linearer Zeit, lassen dabei aber mehr
+						Gramatiken zu. Tree Sitter kommt außerdem mit einigen wichrigen Features. Error Recovery und Incremental
+						Parsing, welche bei den bestehenden Parsern fehlen. Außersem besitzt Tree Sitter eine Query Sprache,
+						Standartiesierte Syntax Bäume, ein Test Framework und Bindings für viele Programmiersprachen.
+					</aside>
 				</section>
 
-				<section>
-				Tree Sitter
-				</section>
 
-				<section>
-					<!-- Grammatik Transformation -->
+			</section>
 
-					<section data-auto-animate>
-					  <pre data-id="code-animation"><code data-trim>
+			<section>
+				<!-- Grammatik Transformation -->
+
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim>
 							ontologyDocument ::= { prefixDeclaration } ontology
-					  </code></pre>
+						</code></pre>
 
-					
-						<aside class="notes">
-							Der Parsergenerator benutzt eine simple Definitionssprache. Die offizielle Gramatik wurde in kleinen Schritten zu dieser überführt. Dabei wurden die folgenden transformationen benutzt.
-						</aside>
-					</section>
 
-					<section data-auto-animate>
-					  <pre data-id="code-animation"><code data-trim>
+					<aside class="notes">
+						Der Parsergenerator benutzt eine simple Definitionssprache. Die offizielle Gramatik wurde in kleinen
+						Schritten zu dieser überführt. Dabei wurden die folgenden transformationen benutzt.
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim>
 							ontologyDocument ::= { prefixDeclaration } ontology
-					  </code></pre>
+						</code></pre>
 
-						↓
+					↓
 
-					  <pre data-id="code-animation"><code data-trim>
-							ontology_document: $ => seq(
-								repeat($.prefix_declaration),
-								$.ontology
-							)
-					  </code></pre>
-					</section>
-
-					<section data-auto-animate data-auto-animate-id="two">
-						<img src="img/grammar-table-1.png"/>
-
-						<aside class="notes">
-							In dieser Tabelle sind alle verwendeten Transformationen zu sehen.
-							[Alle durchgehen und erklären]
-						</aside>
-					</section>
-
-					<section data-auto-animate data-auto-animate-id="two">
-						<img src="img/grammar-table-1.png"/>
-						<img src="img/grammar-table-2.png"/>
-
-						<aside class="notes">
-							Im zweiten Schritt habe ich noch sich wiederholdende Konzepte in Funktionen ausgelagert um die Grammatik lesbarer zu machen.
-						</aside>
-					</section>
-	
+					<pre data-id="code-animation"><code data-trim>
+							<script type="text/template">
+								ontology_document: $ => seq(
+									repeat($.prefix_declaration),
+									$.ontology
+								)
+							</script>
+						</code></pre>
 				</section>
 
+				<section data-auto-animate data-auto-animate-id="two">
+					<img src="img/grammar-table-1.png" />
 
-				<section>
-				Parser Bechmarks
+					<aside class="notes">
+						In dieser Tabelle sind alle verwendeten Transformationen zu sehen.
+						[Alle durchgehen und erklären]
+					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate data-auto-animate-id="two">
+					<img src="img/grammar-table-1.png" />
+					<img src="img/grammar-table-2.png" />
 
-					<section>
-						<img src="img/ls-problem.png" />
-
-						<aside class="notes">
-					    Das Problem mit den Traditionellen IDE's und Plugins ist "die Matrix".
-							Der Aufwand neue Sprachen oder neue Texteditoren hinzuzufügen wächst quadratisch.
-						</aside>
-					</section>
-
-					<section>
-						<img src="img/ls-solution.png" />
-
-						<aside class="notes">
-					    Die Lösung ist eine Trennung von Sprach-Server und Sprach-Client.
-							Wenn Server und Client das gleiche Protoll sprechen kann der Aufwand dramatisch verringert werden.
-						</aside>
-					</section>
-
-					<section>
-						<img height="200" src="img/rust.png" />
-						<span style="font-size: 11rem; vertical-align: top">=</span>
-						<img height="200" src="img/icon.png" />
-						<p>Rust Language Server</p>
-
-						<aside class="notes">
-							Für die OWL Mancherster Syntax habe ich daher einen Language Server implementiert.
-						</aside>
-					</section>
-
+					<aside class="notes">
+						Im zweiten Schritt habe ich noch sich wiederholdende Konzepte in Funktionen ausgelagert um die Grammatik
+						lesbarer zu machen.
+					</aside>
 				</section>
 
-
-
-				<section>
-				Feature Überblick
-				</section>
-
-				<section>
-					<!-- Datenstrukturen -->
-
-					<section data-auto-animate>
-						<img  src="img/string-array.png" />
-					</section>
-
-					<section data-auto-animate>
-						<img  src="img/string-array.png" style="margin-bottom: 0" />
-						<img src="img/string-array-2.png"style="margin-top: 0" />
-					</section>
-
-					<section>
-						<img src="img/rope.png" />
-					</section>
-
-					<section>
-						<img src="img/rope-o.png" />
-
-						<aside class="notes">
-							Inserting and Removing into and from a Rope is way faster.
-							Reporting from i to j is slower.
-						</aside>
-					</section>
-
-				</section>
-
-				<section>
-				Testing
-				</section>
-
-				<section>
-				Deployment
-				</section>
-
-				<section>
-				Qualitative Untersuchung
-				</section>
-
-
-
-				
-
-			<section data-auto-animate>
-			  <pre data-id="code-animation"><code data-trim data-line-numbers>
-			    let planets = [
-			      { name: 'mars', diameter: 6779 },
-			    ]
-			  </code></pre>
 			</section>
-			<section data-auto-animate>
-			  <pre data-id="code-animation"><code data-trim data-line-numbers>
-			    let planets = [
-			      { name: 'mars', diameter: 6779 },
-			      { name: 'earth', diameter: 12742 },
-			      { name: 'jupiter', diameter: 139820 }
-			    ]
-			  </code></pre>
-			</section>
-			<section data-auto-animate>
-			  <pre data-id="code-animation"><code data-trim data-line-numbers>
-			    let circumferenceReducer = ( c, planet ) => {
-			      return c + planet.diameter * Math.PI;
-			    }
 
-			    let planets = [
-			      { name: 'mars', diameter: 6779 },
-			      { name: 'earth', diameter: 12742 },
-			      { name: 'jupiter', diameter: 139820 }
-			    ]
 
-			    let c = planets.reduce( circumferenceReducer, 0 )
-			  </code></pre>
+			<section>
+				<!-- Parser Bechmarks -->
+
+				<section>
+					<img src="img/benchmark_lines.svg" />
+
+					<aside class="notes">
+						Das intiliale parsen ist linerar was nicht überraschend ist bei einem GLR Parser aber ein gutes Zeichen,
+						dass es nicht zu viele Konflikte gibt.
+						Für diesen Benchmark habe ich immer größer werdene Ontologien generiert und dabei pro Input Element ein
+						Frame hinzugefügt, also eine Klasse.
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/benchmark_change_lines.svg" />
+
+					<aside class="notes">
+						Überraschend war, dass das reparsen auch linear ist. Hier hatte ich konstante Zeit erwartet. Der Benchmark
+						nimmet einen Geparsten Tree und den dazugehörigen Source Code und führt das Parsing unverändert nochmal aus.
+						Trotzdem ist diese Aktion sehr schnell. Etwas eine zehnfache Verbesserung zum intitialen Parsen.
+					</aside>
+				</section>
+
 			</section>
-			</div>
+
+			<section>
+
+				<section>
+					<img src="img/ls-problem.png" />
+
+					<aside class="notes">
+						Das Problem mit den Traditionellen IDE's und Plugins ist "die Matrix".
+						Der Aufwand neue Sprachen oder neue Texteditoren hinzuzufügen wächst quadratisch.
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/ls-solution.png" />
+
+					<aside class="notes">
+						Die Lösung ist eine Trennung von Sprach-Server und Sprach-Client.
+						Wenn Server und Client das gleiche Protoll sprechen kann der Aufwand dramatisch verringert werden.
+					</aside>
+				</section>
+
+				<section>
+					<img height="200" src="img/tree-sitter-small.png" />
+					<span style="font-size: 11rem; vertical-align: top">+</span>
+					<img height="200" src="img/rust.png" />
+					<span style="font-size: 11rem; vertical-align: top">=</span>
+					<img height="200" src="img/icon.png" />
+
+					<aside class="notes">
+						Für die OWL Mancherster Syntax habe ich daher einen Language Server implementiert.
+					</aside>
+				</section>
+				<section>
+					<img class="r-stretch" src="img/architecture.png" />
+				</section>
+
+			</section>
+
+
+
+			<section>
+				<!-- Feature Überblick -->
+				<section>
+					<img src="img/screenshot_vscode_just_opened-1.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_just_opened.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_hover.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_diagnostics_1.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_diagnostics_2.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_inlay_hints.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_completion_iri.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_completion_keyword.svg" />
+				</section>
+				<section>
+					<img src="img/screenshot_vscode_gotodefinition.svg" />
+				</section>
+			</section>
+
+			<section>
+				<!-- Datenstrukturen -->
+
+				<section data-auto-animate>
+					<img src="img/string-array.png" />
+				</section>
+
+				<section data-auto-animate>
+					<img src="img/string-array.png" style="margin-bottom: 0" />
+					<img src="img/string-array-2.png" style="margin-top: 0" />
+				</section>
+
+				<section>
+					<img src="img/rope.png" />
+				</section>
+
+				<section>
+					<img src="img/rope-o.png" />
+
+					<aside class="notes">
+						Rope ist eine möglichkeit einen String zu speichern. Die Laufzeitkomplexität für das ändern des Inhalts ist
+						geringer als bei traditionellen Strings. Das wird durch die Baumstruktur erziehlt. Andere Operationen (wie
+						Reporting) und der benötiger Speicher sind im vergleich Größer.
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<!-- Testing -->
+				<section>
+					<pre>
+						<code data-trim data-line-numbers>
+							<script type="text/template">
+								======================
+								Class Frame SubClassOf
+								======================
+
+								Ontology:
+									Class: Person
+										SubClassOf: owl:Thing
+								-------------------------------------
+								(source_file
+									(ontology
+										(class_frame
+											(class_iri (simple_iri))
+											(sub_class_of
+												(description
+													(class_iri (abbreviated_iri)))))))
+							</script>
+						</code>
+					</pre>
+
+					<aside class="notes">
+						Das Projekt enthält auch einige Tests. Darunter diese Grammatik Tests, die schauen, ob der Parser auch den
+						richtigen Syntax Baum generiert.
+					</aside>
+				</section>
+				<section>
+					<pre>
+						<code data-trim data-line-numbers>
+							<script type="text/template">
+#[test]
+fn test_parse() {
+    let mut parser = Parser::new();
+    parser.set_language(*LANGUAGE).unwrap();
+
+    let source_code = "Ontology: Foobar";
+    let tree = parser.parse(source_code, None).unwrap();
+
+    assert_eq!(
+        tree.root_node().to_sexp(),
+        "(source_file (ontology (ontology_iri (simple_iri))))"
+    );
+}
+					</script>
+						</code>
+					</pre>
+
+					<aside class="notes">
+						Es gibt natürlich auch klassische Unit tests. Dieser hier ist ähnlich zu einem Grammatik Test und schaut
+						nur, ob der Parser funktioniert.
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<img src="img/vscode_install.png" />
+
+				<aside class="notes">
+					Das Deployment als Plugin ist automatisiert. Bei einem Push in den main Branch vom VS-Code Plugin Repository
+					wird eine Build erstellt und sowol in den VisualStudio Marketplace als auch in den Open VSX Marketplace
+					hochgeladen. Dabei müssen für jede Architektur, also Windows MacOS und Linux, eigene Binaries erstellt werden.
+					Das Plugin ist also teilweise native, wegen dem Language Server.
+					Andere Editoren können die binary über den Packagemanager von Rust, Cargo, beziehen. Wenn dabei alles glatt
+					läuft kann das Plugin installiert werden.
+				</aside>
+
+			</section>
+
+			<section>
+				<section>
+					<img src="img/form.png" />
+
+					<aside class="notes">
+						Zum abschluss meiner Arbeit habe ich eine Qualitative untersuchung gemacht, bei der ich ein Online-Formular
+						verschickt habe mit 14 Fragen zum Hintergrund des Nutzer, Installation, Useability, Performance und
+						Wünschen.
+						Hier kann man einen Ausschnitt davon sehen.
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/result-1.png" />
+
+					<aside class="notes">
+						Die auswertung konnte ich Online einsehen, wie das Bild zeigt. Im allgemeinen ist das Tool benutztbar und
+						gut, kann aber noch
+						nicht als Ersatzt für Graphische tools herhalten.
+					</aside>
+				</section>
+
+			</section>
+
+
+			<section>
+				<h2>Zusammenfassung</h2>
+
+				<aside class="notes">
+					Zusammenfassend kann ich sagen, das Tool ist nutzbar aber ersetzt nicht die bestehenden Werkzeuge. Es ist ein
+					weiter Schritt dahin mit Textdateien zu arbeiten. In Zukunft könnte noch viel an dem Language Server
+					verbessert werden, wie weitere Features, das einbinden von externen/importierten Ontologien, bessere
+					Diagnostics die mehr auf den Inhalt eingehen und vieles mehr.
+
+					Alles in allem ist das Projekt eine solide basis auf der weiter gearbeitet werden kann.
+				</aside>
+			</section>
+
+
+			<section>
+				<ul>
+					<li><a
+							href="https://github.com/janekx21/bachelor-thesis-presentation">github.com/janekx21/bachelor-thesis-presentation</a>
+					</li>
+					<li><a href="https://github.com/janekx21/bachelor-thesis">github.com/janekx21/bachelor-thesis</a></li>
+					<li><a
+							href="https://github.com/janekx21/owl-ms-language-server">github.com/janekx21/owl-ms-language-server</a>
+					</li>
+					<li><a href="https://github.com/janekx21/tree-sitter-owl-ms">github.com/janekx21/tree-sitter-owl-ms</a></li>
+					<li><a href="https://github.com/janekx21/vscode-owl-ms">github.com/janekx21/vscode-owl-ms</a></li>
+
+				</ul>
+				<aside class="notes">
+					Für die Details lade ich ein die Arbeit zu lesen und sich dazu noch den Code anzuschauen. Hier finden sie alle
+					nötigen Verweise zu meiner Arbeit. [Verweise durchgehen]
+				</aside>
+			</section>
+
+
+
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<!-- <script src="plugin/zoom/zoom.js"></script> -->
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<!-- <script src="plugin/zoom/zoom.js"></script> -->
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
